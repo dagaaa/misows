@@ -27,15 +27,30 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.1</version>
+
                 <configuration>
                     <finalName>misows</finalName>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                     <archive>
                         <manifest>
                             <mainClass>pl.edu.agh.misows.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
+
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -51,6 +66,12 @@
             <groupId>org.influxdb</groupId>
             <artifactId>influxdb-java</artifactId>
             <version>2.17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.kubernetes</groupId>
+            <artifactId>client-java</artifactId>
+            <version>7.0.0</version>
         </dependency>
     </dependencies>
 
